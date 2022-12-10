@@ -1,14 +1,15 @@
-const http = require('node:http');
+const express = require('express');
 
-const hostname = '127.0.0.1';
-const port = 3000;
+import { setUpRoutes } from "./routes";
+import { initDbClient } from "./sqlClient";
 
-const server = http.createServer((req: any, res: { statusCode: number; setHeader: (arg0: string, arg1: string) => void; end: (arg0: string) => void; }) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello, World!\n');
-});
+const PORT = 3000;
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+initDbClient();
+setUpRoutes(app);
+
+app.listen(PORT);
