@@ -1,11 +1,20 @@
-import { Body, Controller, Post, Render } from '@nestjs/common';
-import { client } from "./sqlClient";
+import { Body, Controller, Post } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
+import { Plant } from './plant.entity';
 
 @Controller('plants')
 export class PlantsController {
+  constructor(
+    @InjectRepository(Plant)
+    private plantsRepo: Repository<Plant>,
+  ) {}
+
   @Post()
   create(@Body() body: any): string {
-    client.query('INSERT INTO plants(name) VALUES($1)', [body.name]);
+    const plant = this.plantsRepo.create({ name: body.name });
+    this.plantsRepo.save(plant);
     return 'Success';
   }
 }
