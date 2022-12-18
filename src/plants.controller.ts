@@ -27,6 +27,6 @@ export class PlantsController {
 
   @Get()
   async list(): Promise<Plant[]> {
-    return this.plantsRepo.find();
+    return this.plantsRepo.find({ order: { id: 'ASC' } });
   }
 }

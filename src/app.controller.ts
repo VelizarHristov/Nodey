@@ -1,4 +1,4 @@
-import { Controller, Get, Render } from '@nestjs/common';
+import { Controller, Get, Post, Render } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Plant } from './plant.entity';
@@ -15,5 +15,14 @@ export class AppController {
   async root() {
     const count = await this.plantsRepo.count();
     return { count };
+  }
+
+  @Post('tick')
+  async tick() {
+    const plants = await this.plantsRepo.find();
+    for (const plant of plants)
+      plant.tick();
+    await Promise.all(plants.map(plant => this.plantsRepo.save(plant)));
+    return 'Success'
   }
 }
