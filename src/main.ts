@@ -5,6 +5,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 
 import { AppController } from './app.controller';
+import { Plant } from './plant.entity';
 import { PlantsModule } from './plants.module';
 
 @Module({
@@ -19,6 +20,7 @@ import { PlantsModule } from './plants.module';
       autoLoadEntities: true,
       synchronize: true, // TODO: probably shouldn't be constantly true
     }),
+    TypeOrmModule.forFeature([Plant]),
     PlantsModule
   ],
   controllers: [AppController]
@@ -28,9 +30,10 @@ export class AppModule {}
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
+  app.enableCors();
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('hbs');
 
-  await app.listen(3000);
+  await app.listen(5000);
 }
 bootstrap();
