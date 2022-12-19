@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, ValidationPipe } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
@@ -33,6 +33,7 @@ async function bootstrap() {
   app.enableCors();
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('hbs');
+  app.useGlobalPipes(new ValidationPipe({ forbidUnknownValues: false }));
 
   await app.listen(5000);
 }

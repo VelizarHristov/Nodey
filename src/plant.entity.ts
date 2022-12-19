@@ -4,6 +4,10 @@ export enum Maturity {
   Seed, Sprout, Seedling, Young, Mature
 }
 
+export enum FlowerStatus {
+  None, Bud, Young, Grown
+}
+
 @Entity()
 export class Plant {
   @PrimaryGeneratedColumn()
@@ -12,6 +16,9 @@ export class Plant {
   @Column()
   name: string;
 
+  @Column()
+  flowering: boolean;
+
   @Column({
     type: "enum",
     enum: Maturity,
@@ -19,8 +26,17 @@ export class Plant {
   })
   maturity: Maturity;
 
+  @Column({
+    type: "enum",
+    enum: FlowerStatus,
+    default: FlowerStatus.None,
+  })
+  flowerStatus: FlowerStatus;
+
   public tick() {
     if (this.maturity != Maturity.Mature)
       this.maturity++;
+    if (this.flowering && this.maturity >= Maturity.Young && this.flowerStatus != FlowerStatus.Grown)
+      this.flowerStatus++;
   }
 }

@@ -6,8 +6,12 @@
         <h1>Create plant</h1>
         <div>
             <form action="/plants" method="post">
-                <label for="name">Name:</label><br>
-                <input type="text" id="name" name="name"><br />
+                <label for="name">Name:</label><br />
+                <input type="text" id="name" name="name">
+                <input type="radio" id="flowering" name="flowering" value="true">
+                <label for="flowering">Flowering</label>
+                <input type="radio" id="not-flowering" name="flowering" value="false" checked>
+                <label for="html">Not flowering</label><br />
                 <input type="submit" value="Submit">
             </form>
         </div>

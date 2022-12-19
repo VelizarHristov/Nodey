@@ -1,10 +1,12 @@
-import { Body, Controller, Post, Get, Param, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Post, Get, Param, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Plant } from './plant.entity';
 import { NotFoundInterceptor } from './not_found.interceptor';
+import { CreatePlantDto } from './create_plant.dto';
 
+//@UseInterceptors(ClassSerializerInterceptor)
 @Controller('plants')
 export class PlantsController {
   constructor(
@@ -13,8 +15,8 @@ export class PlantsController {
   ) {}
 
   @Post()
-  create(@Body() body: any): string {
-    const plant = this.plantsRepo.create({ name: body.name });
+  create(@Body() createPlantDto: CreatePlantDto): string {
+    const plant = this.plantsRepo.create(createPlantDto);
     this.plantsRepo.save(plant);
     return 'Success';
   }
