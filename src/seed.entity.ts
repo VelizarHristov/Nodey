@@ -15,4 +15,11 @@ export class Seed {
     this.name = name;
     this.flowering = flowering;
   }
+
+  paramsForPlant() {
+    return {
+      name: this.name,
+      flowering: this.flowering
+    };
+  }
 }
