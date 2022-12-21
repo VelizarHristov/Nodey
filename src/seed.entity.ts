@@ -1,25 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from 'typeorm';
+import { Genes } from './genes.entity';
 
 @Entity()
 export class Seed {
   @PrimaryGeneratedColumn()
-  id: number;
+  id?: number;
 
-  @Column()
-  name: string;
-
-  @Column()
-  flowering: boolean;
-
-  constructor(name: string, flowering: boolean) {
-    this.name = name;
-    this.flowering = flowering;
-  }
-
-  paramsForPlant() {
-    return {
-      name: this.name,
-      flowering: this.flowering
-    };
-  }
+  @ManyToOne((type) => Genes, { eager: true })
+  @JoinColumn()
+  genes: Genes;
 }

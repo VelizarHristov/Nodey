@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Genes } from './genes.entity';
 import { Seed } from './seed.entity'
 
 export enum Maturity {
@@ -35,14 +36,17 @@ export class Plant {
   })
   flowerStatus: FlowerStatus;
 
+  private newGenes(): Genes {
+    return { name: this.name, flowering: this.flowering };
+  }
+
   public tick(): Seed | null {
     if (this.maturity != Maturity.Mature)
       this.maturity++;
     if (this.flowering && this.maturity >= Maturity.Young) {
       this.flowerStatus = (this.flowerStatus + 1) % (FlowerStatus.Grown + 1);
-      if (this.flowerStatus == FlowerStatus.None) {
-        return new Seed(this.name, this.flowering);
-      }
+      if (this.flowerStatus == FlowerStatus.None)
+        return { genes: this.newGenes() };
     }
     return null;
   }

@@ -29,10 +29,10 @@ export class PlantsController {
     const seed = await this.seedsRepo.findOneBy({ id });
     if (seed === null)
       return null;
-    const plant = this.plantsRepo.create(seed.paramsForPlant());
+    const plant = this.plantsRepo.create(seed.genes);
     await Promise.all([
       this.plantsRepo.save(plant),
-      this.seedsRepo.delete(seed.id)
+      this.seedsRepo.delete(seed.id!)
     ]);
     return 'Success';
   }
