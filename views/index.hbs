@@ -7,11 +7,15 @@
         <div>
             <form action="/plants" method="post">
                 <label for="name">Name:</label><br />
-                <input type="text" id="name" name="name">
+                <input type="text" id="name" name="name"><br />
                 <input type="radio" id="flowering" name="flowering" value="true">
                 <label for="flowering">Flowering</label>
                 <input type="radio" id="not-flowering" name="flowering" value="false" checked>
-                <label for="html">Not flowering</label><br />
+                <label for="not-flowering">Not flowering</label><br />
+                <input type="radio" id="fruiting" name="fruiting" value="true">
+                <label for="fruiting">Fruiting</label>
+                <input type="radio" id="not-fruiting" name="fruiting" value="false" checked>
+                <label for="not-fruiting">Not fruiting</label><br />
                 <input type="submit" value="Submit">
             </form>
         </div>

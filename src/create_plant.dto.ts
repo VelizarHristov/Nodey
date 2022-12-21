@@ -7,4 +7,8 @@ export class CreatePlantDto {
   @IsBoolean()
   @Transform(({ value } ) => value === "true", { toClassOnly: true })
   flowering: boolean;
+
+  @IsBoolean()
+  @Transform(({ value } ) => value === "true", { toClassOnly: true })
+  fruiting: boolean;
 }

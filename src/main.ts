@@ -7,9 +7,11 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { Plant } from './plant.entity';
 import { Seed } from './seed.entity';
+import { Fruit } from './fruit.entity';
 import { Genes } from './genes.entity';
 import { PlantsModule } from './plants.module';
 import { SeedsModule } from './seeds.module';
+import { FruitsModule } from './fruits.module';
 
 @Module({
   imports: [
@@ -23,9 +25,10 @@ import { SeedsModule } from './seeds.module';
       autoLoadEntities: true,
       synchronize: true, // TODO: probably shouldn't be constantly true
     }),
-    TypeOrmModule.forFeature([Plant, Seed, Genes]),
+    TypeOrmModule.forFeature([Plant, Seed, Fruit, Genes]),
     PlantsModule,
-    SeedsModule
+    SeedsModule,
+    FruitsModule
   ],
   controllers: [AppController]
 })

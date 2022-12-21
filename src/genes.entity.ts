@@ -10,4 +10,7 @@ export class Genes {
 
   @Column()
   flowering: boolean;
+
+  @Column()
+  fruiting: boolean;
 }
