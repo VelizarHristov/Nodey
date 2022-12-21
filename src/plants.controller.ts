@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Get, Param, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Post, Get, Param, UseInterceptors, Delete } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -46,5 +46,11 @@ export class PlantsController {
   @Get()
   async list(): Promise<Plant[]> {
     return this.plantsRepo.find({ order: { id: 'ASC' } });
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: number) {
+    this.plantsRepo.delete(id);
+    return 'OK';
   }
 }

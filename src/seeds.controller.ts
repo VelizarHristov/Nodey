@@ -1,4 +1,4 @@
-import { Controller, Get, Param, UseInterceptors } from '@nestjs/common';
+import { Controller, Delete, Get, Param, UseInterceptors } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -21,5 +21,11 @@ export class SeedsController {
   @Get()
   async list(): Promise<Seed[]> {
     return this.seedsRepo.find({ order: { id: 'ASC' } });
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: number) {
+    this.seedsRepo.delete(id);
+    return 'OK';
   }
 }
