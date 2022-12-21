@@ -2,12 +2,15 @@ import { Controller, Get, Post, Render } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Plant } from './plant.entity';
+import { Seed } from './seed.entity';
 
 @Controller()
 export class AppController {
   constructor(
     @InjectRepository(Plant)
     private plantsRepo: Repository<Plant>,
+    @InjectRepository(Seed)
+    private seedsRepo: Repository<Seed>
   ) {}
 
   @Get()
@@ -20,9 +23,14 @@ export class AppController {
   @Post('tick')
   async tick() {
     const plants = await this.plantsRepo.find();
-    for (const plant of plants)
-      plant.tick();
+    const seeds: Seed[] = [];
+    for (const plant of plants) {
+      const seed = plant.tick();
+      if (seed != null)
+        seeds.push(seed);
+    }
     await Promise.all(plants.map(plant => this.plantsRepo.save(plant)));
+    await Promise.all(seeds.map(seed => this.seedsRepo.save(seed)));
     return 'Success'
   }
 }
