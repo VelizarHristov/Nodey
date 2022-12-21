@@ -29,8 +29,9 @@ export class AppController {
       if (seed != null)
         seeds.push(seed);
     }
-    await Promise.all(plants.map(plant => this.plantsRepo.save(plant)));
-    await Promise.all(seeds.map(seed => this.seedsRepo.save(seed)));
-    return 'Success'
+    const savePlants: Promise<any>[] = plants.map(plant => this.plantsRepo.save(plant));
+    const saveSeeds = seeds.map(seed => this.seedsRepo.save(seed));
+    await Promise.all(savePlants.concat(saveSeeds));
+    return 'Success';
   }
 }
