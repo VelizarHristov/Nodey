@@ -4,14 +4,14 @@ import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 
-import { AppController } from './app.controller';
-import { Plant } from './plant.entity';
-import { Seed } from './seed.entity';
-import { Fruit } from './fruit.entity';
-import { Genes } from './genes.entity';
-import { PlantsModule } from './plants.module';
-import { SeedsModule } from './seeds.module';
-import { FruitsModule } from './fruits.module';
+import { AppController } from './controllers/app.controller';
+import { Plant } from './entities/plant.entity';
+import { Seed } from './entities/seed.entity';
+import { Fruit } from './entities/fruit.entity';
+import { Genes } from './entities/genes.entity';
+import { PlantsModule } from './modules/plants.module';
+import { SeedsModule } from './modules/seeds.module';
+import { FruitsModule } from './modules/fruits.module';
 
 @Module({
   imports: [

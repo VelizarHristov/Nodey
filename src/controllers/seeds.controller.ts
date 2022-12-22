@@ -2,8 +2,8 @@ import { Controller, Delete, Get, Param, UseInterceptors } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { Seed } from './seed.entity';
-import { NotFoundInterceptor } from './not_found.interceptor';
+import { Seed } from '../entities/seed.entity';
+import { NotFoundInterceptor } from '../not_found.interceptor';
 
 @Controller('seeds')
 export class SeedsController {

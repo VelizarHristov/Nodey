@@ -1,10 +1,11 @@
 import { Controller, Get, Post, Render } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Plant } from './plant.entity';
-import { Seed } from './seed.entity';
-import { Fruit } from './fruit.entity';
-import { Genes } from './genes.entity';
+
+import { Plant } from '../entities/plant.entity';
+import { Seed } from '../entities/seed.entity';
+import { Fruit } from '../entities/fruit.entity';
+import { Genes } from '../entities/genes.entity';
 
 @Controller()
 export class AppController {

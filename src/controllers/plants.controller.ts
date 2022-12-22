@@ -2,10 +2,10 @@ import { Body, Controller, Post, Get, Param, UseInterceptors, Delete } from '@ne
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { Plant } from './plant.entity';
-import { NotFoundInterceptor } from './not_found.interceptor';
-import { CreatePlantDto } from './create_plant.dto';
-import { Seed } from './seed.entity';
+import { Plant } from '../entities/plant.entity';
+import { NotFoundInterceptor } from '../not_found.interceptor';
+import { CreatePlantDto } from '../create_plant.dto';
+import { Seed } from '../entities/seed.entity';
 
 @Controller('plants')
 export class PlantsController {
